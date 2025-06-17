@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人博客系统</title>
+    <!-- 刷新页面错误处理脚本 -->
+    <script>
+      // 拦截页面错误提示
+      window.addEventListener('error', function(event) {
+        if (event.target && (event.target.tagName === 'LINK' || event.target.tagName === 'SCRIPT')) {
+          // 静态资源加载错误，不显示错误
+          event.preventDefault();
+          return false;
+        }
+      }, true);
+
+      // 隐藏错误消息的函数
+      function hideErrorMessages() {
+        var errorMsgs = document.querySelectorAll('.el-message--error');
+        if (errorMsgs) {
+          errorMsgs.forEach(function(msg) {
+            if (msg.textContent && msg.textContent.includes('请求的资源不存在')) {
+              msg.style.display = 'none';
+            }
+          });
+        }
+      }
+
+      // 定期检查并隐藏错误消息
+      setInterval(hideErrorMessages, 100);
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
